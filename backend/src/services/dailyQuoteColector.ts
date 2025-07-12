@@ -1,7 +1,7 @@
 import cron from "node-cron";
 import MOTD from "../models/MOTD";
 import dayjs = require("dayjs");
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 interface expectedRes {
   q: string;
@@ -17,15 +17,14 @@ type motdObject = {
 async function fetchData(date: string): Promise<motdObject> {
   const url = "https://zenquotes.io/api/today";
 
-  const response: expectedRes[] = await axios.get(url);
-
-  if (!response) {
+  const response: AxiosResponse = await axios.get(url);
+  if (response.data.length == 0) {
     throw new Error('error while fetching data from API')
   }
 
   const resObject: motdObject = {
-    message: response[0].q,
-    author: response[0].a,
+    message: response.data[0].q,
+    author: response.data[0].a,
     date,
   };
 
@@ -33,11 +32,10 @@ async function fetchData(date: string): Promise<motdObject> {
 }
 
 // get new Moossage every day at 8 AM
-cron.schedule("0 8 * * *", async () => {
+cron.schedule("08 19 * * *", async () => {
   const today = dayjs().format("YYYY-MM-DD");
   try {
     const response = await MOTD.findOne({ where: { date: today }, raw: true });
-
     if (!response) {
       const data = await fetchData(today);
       await MOTD.create(data);

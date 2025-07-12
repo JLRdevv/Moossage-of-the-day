@@ -3,30 +3,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const node_cron_1 = __importDefault(require("node-cron"));
 const MOTD_1 = __importDefault(require("../models/MOTD"));
 const dayjs = require("dayjs");
 const axios_1 = __importDefault(require("axios"));
-async function teste() {
-    const today = dayjs().format('YYYY-MM-DD');
-    await MOTD_1.default.findOne({ where: { date: today }, raw: true }).then((response) => {
-        console.log(response);
-        if (true) {
-            const url = "https://zenquotes.io/api/today";
-            axios_1.default
-                .get(url)
-                .then((response) => {
-                const data = response.data;
-                const motdObject = {
-                    message: data[0].q,
-                    author: data[0].a,
-                    date: today,
-                };
-                MOTD_1.default.create(motdObject);
-            })
-                .catch((error) => {
-                MOTD_1.default.create({ message: "there was an error while saving today's moosage", author: "sorry", date: today });
-            });
-        }
-    });
+async function fetchData(date) {
+    const url = "https://zenquotes.io/api/today";
+    const response = await axios_1.default.get(url);
+    console.log(response + "2");
+    if (response.data.length == 0) {
+        throw new Error('error while fetching data from API');
+    }
+    const resObject = {
+        message: response.data[0].q,
+        author: response.data[0].a,
+        date,
+    };
+    return resObject;
 }
-teste();
+// get new Moossage every day at 8 AM
+node_cron_1.default.schedule("06 19 * * *", async () => {
+    const today = dayjs().format("YYYY-MM-DD");
+    try {
+        const response = await MOTD_1.default.findOne({ where: { date: today }, raw: true });
+        console.log(response);
+        console.log("teste");
+        if (!response) {
+            const data = await fetchData(today);
+            console.log(data + "3");
+            await MOTD_1.default.create(data);
+        }
+    }
+    catch (error) {
+        console.log("erro:" + error);
+        await MOTD_1.default.create({
+            message: "there was an error while saving today's moosage",
+            author: "sorry",
+            date: today,
+        });
+    }
+});

@@ -13,7 +13,7 @@ const MOTD = database_1.default.define('motd', {
         type: sequelize_1.DataTypes.STRING
     },
     date: {
-        type: sequelize_1.DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATEONLY,
         unique: true
     }
 });

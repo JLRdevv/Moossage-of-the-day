@@ -11,7 +11,7 @@ const app = (0, express_1.default)();
 app.get("/", (req, res) => {
     res.send("hello world");
 });
-database_1.default.sync().then(() => {
+database_1.default.sync({ force: true }).then(() => {
     app.listen(3000);
-    console.log("escutando porta");
+    console.log("app running...");
 });
