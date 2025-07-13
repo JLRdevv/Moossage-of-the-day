@@ -18,11 +18,15 @@ Like.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
+    motdId: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+    },
 }, {
     sequelize: database_1.default,
     modelName: "like",
     tableName: "likes",
 });
-MOTD_1.default.hasMany(Like);
-Like.belongsTo(MOTD_1.default);
+Like.belongsTo(MOTD_1.default, { foreignKey: "motdId" });
+MOTD_1.default.hasMany(Like, { foreignKey: "motdId" });
 exports.default = Like;

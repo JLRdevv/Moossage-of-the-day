@@ -20,7 +20,7 @@ async function fetchData(date) {
     };
     return resObject;
 }
-// get new Moossage every day at 8 AM
+// get new Quote every day at 8 AM
 node_cron_1.default.schedule("51 12 * * *", async () => {
     console.log('gathering message...');
     const today = dayjs().format("YYYY-MM-DD");

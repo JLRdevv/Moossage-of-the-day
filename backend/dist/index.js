@@ -6,14 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const database_1 = __importDefault(require("./database/database"));
 require("./models/MOTD");
+require("./models/Like");
 require("./services/dailyQuoteColector");
 const motdRouter_1 = __importDefault(require("./routes/motdRouter"));
+const likeRouter_1 = __importDefault(require("./routes/likeRouter"));
 const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({
     extended: true
 }));
 app.use(express_1.default.json());
 app.use('/get', motdRouter_1.default);
+app.use('/like', likeRouter_1.default);
 app.get("/", (req, res) => {
     res.send("hello world");
 });
