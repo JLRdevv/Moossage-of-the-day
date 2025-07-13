@@ -1,17 +1,45 @@
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
 import db from "../database/database";
-import { DataTypes } from "sequelize";
 
-const MOTD = db.define('motd', {
+class MOTD extends Model<InferAttributes<MOTD>, InferCreationAttributes<MOTD>> {
+  declare id: CreationOptional<number>;
+  declare message: string;
+  declare author: string;
+  declare date: string;
+}
+
+MOTD.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+    },
     message: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     author: {
-        type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     date: {
-        type: DataTypes.DATEONLY,
-        unique: true
-    }
-})
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      unique: true,
+    },
+  },
+  {
+    sequelize: db,
+    modelName: "motd",
+    tableName: "motds",
+  }
+);
 
-export default MOTD
+export default MOTD;

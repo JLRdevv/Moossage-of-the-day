@@ -3,17 +3,14 @@ import MOTD from "../models/MOTD";
 import dayjs = require("dayjs");
 import axios, { AxiosResponse } from "axios";
 
-interface expectedRes {
-  q: string;
-  a: string;
-  h: string;
-}
-
 type motdObject = {
   message: string;
   author: string;
   date: string;
 };
+
+
+
 async function fetchData(date: string): Promise<motdObject> {
   const url = "https://zenquotes.io/api/today";
 
@@ -31,8 +28,9 @@ async function fetchData(date: string): Promise<motdObject> {
   return resObject;
 }
 
-// get new Moossage every day at 8 AM
-cron.schedule("08 19 * * *", async () => {
+// get new Quote every day at 8 AM
+cron.schedule("51 12 * * *", async () => {
+  console.log('gathering message...')
   const today = dayjs().format("YYYY-MM-DD");
   try {
     const response = await MOTD.findOne({ where: { date: today }, raw: true });

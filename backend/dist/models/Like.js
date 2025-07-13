@@ -5,30 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const database_1 = __importDefault(require("../database/database"));
-class MOTD extends sequelize_1.Model {
+const MOTD_1 = __importDefault(require("./MOTD"));
+class Like extends sequelize_1.Model {
 }
-MOTD.init({
+Like.init({
     id: {
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-    message: {
+    user_uuid: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-    },
-    author: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-    },
-    date: {
-        type: sequelize_1.DataTypes.DATEONLY,
-        allowNull: false,
-        unique: true,
     },
 }, {
     sequelize: database_1.default,
-    modelName: "motd",
-    tableName: "motds",
+    modelName: "like",
+    tableName: "likes",
 });
-exports.default = MOTD;
+MOTD_1.default.hasMany(Like);
+Like.belongsTo(MOTD_1.default);
+exports.default = Like;

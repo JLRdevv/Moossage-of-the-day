@@ -10,7 +10,6 @@ const axios_1 = __importDefault(require("axios"));
 async function fetchData(date) {
     const url = "https://zenquotes.io/api/today";
     const response = await axios_1.default.get(url);
-    console.log(response + "2");
     if (response.data.length == 0) {
         throw new Error('error while fetching data from API');
     }
@@ -22,20 +21,17 @@ async function fetchData(date) {
     return resObject;
 }
 // get new Moossage every day at 8 AM
-node_cron_1.default.schedule("06 19 * * *", async () => {
+node_cron_1.default.schedule("51 12 * * *", async () => {
+    console.log('gathering message...');
     const today = dayjs().format("YYYY-MM-DD");
     try {
         const response = await MOTD_1.default.findOne({ where: { date: today }, raw: true });
-        console.log(response);
-        console.log("teste");
         if (!response) {
             const data = await fetchData(today);
-            console.log(data + "3");
             await MOTD_1.default.create(data);
         }
     }
     catch (error) {
-        console.log("erro:" + error);
         await MOTD_1.default.create({
             message: "there was an error while saving today's moosage",
             author: "sorry",
