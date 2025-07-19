@@ -21,7 +21,6 @@ class likeController {
                 user_uuid,
                 motdId,
             };
-            console.log(likeObject);
             await Like_1.default.create(likeObject)
                 .then(() => {
                 return res.status(200).json({

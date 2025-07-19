@@ -1,17 +1,27 @@
 import MOTD from "../models/MOTD";
 import { say } from "cowsay";
 import { type Request, type Response } from "express";
+import motdFetcher from "../services/dailyQuoteColector";
 
 class motdController {
   static async getMotd(req: Request, res: Response): Promise<Response> {
-    const getMotd = await MOTD.findOne({ order: [['id', 'DESC']], raw: true });
+    let getMotd = await MOTD.findOne({ order: [['id', 'DESC']], raw: true });
+
+    if (!getMotd) {
+      // Fetch new MOTD and retry
+      await motdFetcher();
+      getMotd = await MOTD.findOne({ order: [['id', 'DESC']], raw: true });
+    }
 
     let eyes = "oO"
     let tongue = ""
-    
-    if(req.body.dead == true) {
-        eyes = "XX"
-        tongue = "U"
+    if (req.body) {
+      if (req.body.dead){
+        if(req.body.dead == true) {
+              eyes = "XX"
+              tongue = "U"
+        }
+      }
     }
 
     if (getMotd) {
@@ -20,7 +30,6 @@ class motdController {
         e: eyes,
         T: tongue
       });
-      console.log(responseMessage)
       return res.status(200).json({
         data: responseMessage,
         success: true,

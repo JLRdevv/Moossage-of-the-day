@@ -5,9 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const MOTD_1 = __importDefault(require("../models/MOTD"));
 const cowsay_1 = require("cowsay");
+const dailyQuoteColector_1 = __importDefault(require("../services/dailyQuoteColector"));
 class motdController {
     static async getMotd(req, res) {
-        const getMotd = await MOTD_1.default.findOne({ order: [['id', 'DESC']], raw: true });
+        let getMotd = await MOTD_1.default.findOne({ order: [['id', 'DESC']], raw: true });
+        if (!getMotd) {
+            // Fetch new MOTD and retry
+            await (0, dailyQuoteColector_1.default)();
+            getMotd = await MOTD_1.default.findOne({ order: [['id', 'DESC']], raw: true });
+        }
         let eyes = "oO";
         let tongue = "";
         if (req.body.dead == true) {
@@ -20,7 +26,6 @@ class motdController {
                 e: eyes,
                 T: tongue
             });
-            console.log(responseMessage);
             return res.status(200).json({
                 data: responseMessage,
                 success: true,

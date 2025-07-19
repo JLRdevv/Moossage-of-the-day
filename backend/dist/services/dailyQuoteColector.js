@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = motdFetcher;
 const node_cron_1 = __importDefault(require("node-cron"));
 const MOTD_1 = __importDefault(require("../models/MOTD"));
 const dayjs = require("dayjs");
@@ -20,8 +21,7 @@ async function fetchData(date) {
     };
     return resObject;
 }
-// get new Quote every day at 8 AM
-node_cron_1.default.schedule("51 12 * * *", async () => {
+async function motdFetcher() {
     console.log('gathering message...');
     const today = dayjs().format("YYYY-MM-DD");
     try {
@@ -38,4 +38,6 @@ node_cron_1.default.schedule("51 12 * * *", async () => {
             date: today,
         });
     }
-});
+}
+// get new Quote every day at 8 AM
+node_cron_1.default.schedule("0 8 * * *", motdFetcher);

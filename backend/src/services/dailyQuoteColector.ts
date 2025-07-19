@@ -28,8 +28,7 @@ async function fetchData(date: string): Promise<motdObject> {
   return resObject;
 }
 
-// get new Quote every day at 8 AM
-cron.schedule("51 12 * * *", async () => {
+export default async function motdFetcher() {
   console.log('gathering message...')
   const today = dayjs().format("YYYY-MM-DD");
   try {
@@ -45,4 +44,9 @@ cron.schedule("51 12 * * *", async () => {
       date: today,
     });
   }
-});
+}
+
+// get new Quote every day at 8 AM
+cron.schedule("0 8 * * *", motdFetcher);
+
+

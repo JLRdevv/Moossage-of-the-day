@@ -3,24 +3,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// Libs
 const express_1 = __importDefault(require("express"));
 const database_1 = __importDefault(require("./database/database"));
+// Models
 require("./models/MOTD");
 require("./models/Like");
-require("./services/dailyQuoteColector");
+// Routers
 const motdRouter_1 = __importDefault(require("./routes/motdRouter"));
 const likeRouter_1 = __importDefault(require("./routes/likeRouter"));
+// Services
+require("./services/dailyQuoteColector");
+const rateLimiter_1 = __importDefault(require("./config/rateLimiter"));
 const app = (0, express_1.default)();
 app.use(express_1.default.urlencoded({
-    extended: true
+    extended: true,
 }));
 app.use(express_1.default.json());
-app.use('/get', motdRouter_1.default);
-app.use('/like', likeRouter_1.default);
-app.get("/", (req, res) => {
-    res.send("hello world");
-});
+app.use(rateLimiter_1.default);
+app.use("/get", motdRouter_1.default);
+app.use("/like", likeRouter_1.default);
+const port = 5000;
 database_1.default.sync().then(() => {
-    app.listen(3000);
-    console.log("app running...");
+    app.listen(port, '0.0.0.0', () => {
+        console.log(`App running on port ${port}`);
+    });
 });

@@ -1,6 +1,7 @@
 // Libs
 import express from "express";
 import db from "./database/database";
+import cors from "cors";
 
 // Models
 import "./models/MOTD";
@@ -16,6 +17,8 @@ import limiter from "./config/rateLimiter";
 
 const app = express();
 
+app.use(cors( {credentials: true, origin: 'http://localhost:5173'}))
+
 app.use(
   express.urlencoded({
     extended: true,
@@ -30,7 +33,10 @@ app.use("/get", routermotd);
 
 app.use("/like", routerlike);
 
+const port = 5000
 db.sync().then(() => {
-  app.listen(3000);
-  console.log("app running...");
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`App running on port ${port}`);
+  });
+  
 });
