@@ -1,6 +1,6 @@
 import MOTD from "../models/MOTD";
 import { say } from "cowsay";
-import { response, type Request, type Response } from "express";
+import { response, text, type Request, type Response } from "express";
 import motdFetcher from "../services/dailyQuoteColector";
 import dayjs from "dayjs";
 
@@ -41,7 +41,8 @@ class motdController {
         text: `"${getMotd.message}"\n -${getMotd.author}`,
         e: eyes,
         T: tongue,
-      });
+        W: 45,
+      } as any);
       return res.status(200).json({
         data: responseMessage,
         success: true,

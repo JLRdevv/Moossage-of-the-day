@@ -57,6 +57,29 @@ hr {
   gap: 20px;
 }
 .timerDiv {
-  position: fixed;
-  top: 10vh
+  position: absolute;
+  top: 10vh;
+}
+
+@media (max-width: 768px) {
+  pre {
+    font-size: 0.7em;
+    width: fit-content;
+    justify-self: center;
+  }
+  .motdBody {
+    padding: 15px;
+  }
+  .timerDiv {
+    top: 15vh;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .timerDiv {
+    top: 20vh;
+  }
+  .motdBody {
+    margin-top: 15vh;
+  }
 }

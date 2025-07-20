@@ -5,8 +5,8 @@ export default function Footer() {
   return (
     <footer>
       <div className={style.footerDiv}>
-        <p>© 2025 Moossage of the Day.</p>
-        <p>
+        <p className={style.pFooter} >© 2025 Moossage of the Day.</p>
+        <p className={style.pFooter}>
           Made with <span className={style.heartSpan}>❤️</span> by João
         </p>
       </div>

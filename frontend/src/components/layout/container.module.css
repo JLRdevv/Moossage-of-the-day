@@ -7,3 +7,14 @@ div.containerDiv {
   justify-content: center;
   flex-direction: column;
 }
+
+@media (max-width: 768px) {
+  div.containerDiv {
+    padding: 12px;
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  div.containerDiv {
+    min-height: 150vh;
+  }
+}

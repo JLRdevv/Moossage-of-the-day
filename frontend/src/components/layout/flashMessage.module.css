@@ -12,6 +12,7 @@
   transition: 250ms;
   border-radius: 20px;
   overflow: hidden;
+    box-shadow: 0 6px 20px 6px rgba(0, 0, 0, 0.2);
 }
 p {
   text-align: center;
@@ -47,4 +48,14 @@ hr.progressBar {
   to {
     width: 0;
   }
+}
+
+@media (max-width: 768px) {
+    p {
+      font-size: 1em;
+      padding: 12px 17px;
+    }
+    .flashMessage {
+      border-radius: 10px;
+    }
 }

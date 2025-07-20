@@ -20,3 +20,9 @@ nav a {
   margin: 0 20px;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  nav {
+    height: 8vh;
+  }
+}

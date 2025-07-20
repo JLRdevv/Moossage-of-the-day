@@ -20,7 +20,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Navigate to={"/motd"} replace />} />
-            <Route path="/about" element={<h1>About Page</h1>} />
+            <Route path="/about" element={<h1>Wip</h1>} />
             <Route path="/motd" element={<Motd />} />
           </Routes>
         </Container>

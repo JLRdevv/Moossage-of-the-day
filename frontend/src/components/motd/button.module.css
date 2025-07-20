@@ -21,3 +21,10 @@ button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) { 
+  button {
+    font-size: 1.11em;
+    padding: 4px 3px;
+  }
+}

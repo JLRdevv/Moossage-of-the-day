@@ -18,7 +18,7 @@ footer {
   flex-direction: column;
 }
 
-.footerDiv p {
+.footerDiv p.pFooter {
   font-size: 1rem;
   font-weight: bold;
 }
@@ -37,5 +37,33 @@ footer {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    height: 9vh;
+  }
+  p.pFooter {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0;
+  }
+  .footerDiv {
+    gap: 5px;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  footer {
+    height: 15vh;
+  }
+  p.pFooter {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0;
+  }
+  .footerDiv {
+    gap: 5px;
   }
 }
