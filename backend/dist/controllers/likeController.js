@@ -51,5 +51,53 @@ class likeController {
             });
         }
     }
+    static async getLikes(req, res) {
+        if (req.body && req.body.motdId) {
+            const motdExists = await MOTD_1.default.findOne({ where: { id: req.body.motdId } });
+            if (!motdExists) {
+                return res.status(404).json({
+                    message: "Moossage of the day not found",
+                    success: false,
+                });
+            }
+            const likes = await Like_1.default.count({
+                where: { motdId: req.body.motdId },
+            });
+            return res.status(200).json({
+                message: "Likes retrieved successfully",
+                likes,
+                success: true,
+            });
+        }
+        return res.status(400).json({
+            message: "Invalid request body",
+            success: false,
+        });
+    }
+    static async isLiked(req, res) {
+        if (req.body && req.body.motdId && req.body.user_uuid) {
+            const motdExists = await MOTD_1.default.findOne({ where: { id: req.body.motdId } });
+            console.log(motdExists);
+            if (!motdExists) {
+                return res.status(500).json({
+                    message: "Invalid motd id",
+                });
+            }
+            const likeFetch = await Like_1.default.findOne({
+                where: { motdId: req.body.motdId, user_uuid: req.body.user_uuid },
+            });
+            let isLiked = false;
+            if (likeFetch) {
+                isLiked = true;
+            }
+            return res.status(200).json({
+                liked: isLiked,
+                sucess: true,
+            });
+        }
+        return res.status(500).json({
+            message: "Invalid Request Body",
+        });
+    }
 }
 exports.default = likeController;

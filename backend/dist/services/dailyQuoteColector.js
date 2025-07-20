@@ -26,6 +26,7 @@ async function motdFetcher() {
     const today = dayjs().format("YYYY-MM-DD");
     try {
         const response = await MOTD_1.default.findOne({ where: { date: today }, raw: true });
+        console.log('found response:', response);
         if (!response) {
             const data = await fetchData(today);
             await MOTD_1.default.create(data);
@@ -39,5 +40,5 @@ async function motdFetcher() {
         });
     }
 }
-// get new Quote every day at 8 AM
-node_cron_1.default.schedule("0 8 * * *", motdFetcher);
+// get new Quote every day at midnight
+node_cron_1.default.schedule("0 0 * * *", motdFetcher);
