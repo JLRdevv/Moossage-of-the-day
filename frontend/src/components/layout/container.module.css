@@ -1,0 +1,7 @@
+div.containerDiv {
+  min-height: 83vh;
+  padding: 20px;
+  background-color: var(--background-color);
+  display: flex;
+  align-items: center;
+}

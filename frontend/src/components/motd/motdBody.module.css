@@ -1,0 +1,46 @@
+.motdBody {
+  background-color: var(--primary-color);
+  opacity: 0.9;
+  margin: 0 auto;
+  box-sizing: content-box !important;
+  width: fit-content;
+  padding: 30px;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px 6px rgba(0, 0, 0, 0.2);
+}
+pre {
+  font-family: "monospace", monospace;
+  font-size: 1.5em;
+  font-weight: 100;
+  height: fit-content;
+}
+.dateTitle {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.weekDayTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+hr {
+  margin: 20px 0;
+}
+
+.loaderDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionsDiv {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}

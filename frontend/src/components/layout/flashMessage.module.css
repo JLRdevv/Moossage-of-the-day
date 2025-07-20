@@ -1,0 +1,50 @@
+.flashMessage {
+  position: fixed;
+  bottom: 15vh;
+
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+
+  width: fit-content;
+  justify-self: center;
+  display: none;
+  transition: 250ms;
+  border-radius: 20px;
+  overflow: hidden;
+}
+p {
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding: 15px 25px;
+}
+hr.progressBar {
+  margin: 0 !important;
+  height: 5px;
+  border: 0;
+  animation: progress 2s linear forwards;
+}
+
+.progressBar {
+  background-color: white;
+}
+.success {
+  background-color: var(--primary-color);
+}
+.error {
+  background-color: #db4e35;
+}
+
+.visible {
+  display: block;
+}
+
+@keyframes progress {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0;
+  }
+}

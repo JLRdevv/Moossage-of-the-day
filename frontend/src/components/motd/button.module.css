@@ -1,0 +1,23 @@
+button {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+  cursor: pointer;
+  transition: 200ms;
+}
+.toggled,
+button:hover {
+  background-color: white;
+  color: var(--primary-color);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
