@@ -1,0 +1,33 @@
+import { say } from "cowsay";
+import { Request, Response } from "express";
+class Custom {
+  static makeCustom(req: Request, res: Response) {
+    let text = "Mooo";
+    let tongue = "";
+    let eyes = "oO";
+
+    if (req.body) {
+      if (req.body.text) {
+        text = req.body.text;
+      }
+      if (req.body.tongue) {
+        tongue = req.body.tongue;
+      }
+      if (req.body.eyes) {
+        eyes = req.body.eyes;
+      }
+    }
+
+    const responseMessage = say({
+      text,
+      T: tongue,
+      e: eyes,
+    });
+    console.log(responseMessage);
+    res.status(200).json({
+      data: responseMessage,
+    });
+  }
+}
+
+export default Custom;

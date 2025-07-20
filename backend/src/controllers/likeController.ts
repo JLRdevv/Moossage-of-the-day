@@ -1,6 +1,7 @@
 import MOTD from "../models/MOTD";
 import Like from "../models/Like";
 import { type Request, type Response } from "express";
+import { where } from "sequelize";
 
 interface expectedRequestBody {
   user_uuid: string;
@@ -79,6 +80,33 @@ class likeController {
     return res.status(400).json({
       message: "Invalid request body",
       success: false,
+    });
+  }
+
+  static async isLiked(req: Request, res: Response) {
+    if (req.body && req.body.motdId && req.body.user_uuid) {
+      const motdExists = await MOTD.findOne({ where: { id: req.body.motdId } });
+      console.log(motdExists)
+      if (!motdExists) {
+        return res.status(500).json({
+          message: "Invalid motd id",
+        });
+      }
+
+      const likeFetch = await Like.findOne({
+        where: { motdId: req.body.motdId, user_uuid: req.body.user_uuid },
+      });
+      let isLiked = false;
+      if (likeFetch) {
+        isLiked = true;
+      }
+      return res.status(200).json({
+        liked: isLiked,
+        sucess: true,
+      });
+    }
+    return res.status(500).json({
+      message: "Invalid Request Body",
     });
   }
 }
