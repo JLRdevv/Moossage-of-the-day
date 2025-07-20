@@ -20,7 +20,6 @@ export default function Like({ motdId, userUuid }: LikeProps) {
   const [likes, setLikes] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [hasLiked, setHasLiked] = useState(false);
 
   const fetchLikes = useCallback(async () => {
     setLoading(true);
@@ -44,9 +43,9 @@ export default function Like({ motdId, userUuid }: LikeProps) {
         user_uuid: userUuid,
       });
       if (like.data.message === "liked") {
-        setHasLiked(true);
+        setIsLiked(true)
       } else {
-        setHasLiked(false);
+        setIsLiked(false);
       }
       await fetchLikes();
     } catch (err) {
@@ -56,19 +55,33 @@ export default function Like({ motdId, userUuid }: LikeProps) {
     }
   }
 
+  const [isLiked, setIsLiked] = useState<boolean>();
+
   useEffect(() => {
     fetchLikes();
+    async function fetchIsLiked() {
+      const fetch = await api.post("/like/isLiked", {
+        motdId,
+        user_uuid: userUuid,
+      });
+      if(fetch && fetch.data.liked === true) {
+        setIsLiked(true)
+        return
+      }
+      setIsLiked(false)
+    }
+    fetchIsLiked()
   }, [fetchLikes]);
 
   return (
     <>
       <div className={style.likeContainer}>
         <Button
-          text="Like"
+          text={isLiked ? 'Dislike' : 'Like'}
           onclick={handleLike}
           icon={<i className="bi bi-hand-thumbs-up"></i>}
           iconOnHover={<i className="bi bi-hand-thumbs-up-fill"></i>}
-          toggled={hasLiked}
+          toggled={isLiked}
         />
         {loading ? (
           <MoonLoader color="white" size={20} />

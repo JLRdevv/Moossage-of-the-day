@@ -4,4 +4,6 @@ div.containerDiv {
   background-color: var(--background-color);
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }

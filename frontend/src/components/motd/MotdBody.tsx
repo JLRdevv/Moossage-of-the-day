@@ -10,9 +10,11 @@ import getBrowserId from "../../utils/GetBrowserUUID";
 import Button from "../motd/Button";
 import FlashMessage from "../layout/FlashMessage";
 import Like from "./Like";
+import Timer from "../layout/Timer";
 
 // Css
 import style from "./MotdBody.module.css";
+
 
 interface MotdBodyProps {
   message: string | null;
@@ -71,6 +73,10 @@ export default function MotdBody({
   }
 
   return (
+    <>
+    <div className={style.timerDiv}>
+      <Timer/>
+    </div>
     <div className={style.motdBody}>
       {loading ? (
         <h1 className={style.loadingTitle}>Loading...</h1>
@@ -137,5 +143,6 @@ export default function MotdBody({
         isVisible={isVisible}
       />
     </div>
+    </>
   );
 }
