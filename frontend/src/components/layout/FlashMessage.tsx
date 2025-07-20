@@ -1,5 +1,8 @@
-import style from "./flashMessage.module.css";
+// Libs
 import { useState, useEffect } from "react";
+
+// Css
+import style from "./flashMessage.module.css";
 
 interface FlashMessageProps {
   message: string;

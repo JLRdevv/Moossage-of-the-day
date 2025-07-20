@@ -57,6 +57,30 @@ class likeController {
         });
     }
   }
+
+  static async getLikes(req: Request, res: Response) {
+    if (req.body && req.body.motdId) {
+      const motdExists = await MOTD.findOne({ where: { id: req.body.motdId } });
+      if (!motdExists) {
+        return res.status(404).json({
+          message: "Moossage of the day not found",
+          success: false,
+        });
+      }
+      const likes = await Like.count({
+        where: { motdId: req.body.motdId },
+      });
+      return res.status(200).json({
+        message: "Likes retrieved successfully",
+        likes,
+        success: true,
+      });
+    }
+    return res.status(400).json({
+      message: "Invalid request body",
+      success: false,
+    });
+  }
 }
 
 export default likeController;

@@ -47,6 +47,7 @@ class motdController {
         success: true,
         date: getMotd.date,
         weekDay,
+        motdId: getMotd.id,
       });
     }
     return res.status(500).json({

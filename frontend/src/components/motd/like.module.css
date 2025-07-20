@@ -1,0 +1,8 @@
+.likeContainer {
+  display: flex;
+  align-items: center;
+}
+
+.likesCount {
+  padding-left: 10px !important;
+}

@@ -1,6 +1,9 @@
-import styleCss from "./button.module.css";
+// Libs
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useState } from "react";
+
+// Css
+import styleCss from "./button.module.css";
 
 interface ButtonProps {
   text: string;

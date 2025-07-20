@@ -1,9 +1,12 @@
+// Libs
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
+
+// Components
 import Motd from "./components/pages/Motd";
 import Navbar from "./components/layout/Navbar";
 import Container from "./components/layout/container";

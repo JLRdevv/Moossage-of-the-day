@@ -1,5 +1,10 @@
+// Libs
 import { useState, useEffect } from "react";
+
+// Utils
 import api from "../../utils/Api";
+
+// Components
 import MotdBody from "../motd/MotdBody";
 
 interface MotdData {
@@ -7,6 +12,7 @@ interface MotdData {
   date: string;
   sucess: boolean;
   weekDay: string;
+  motdId: number;
 }
 
 type expectedMotd = MotdData | null;
@@ -38,6 +44,7 @@ export default function Motd() {
         error={error}
         date={motd ? motd.date : null}
         weekDay={motd ? motd.weekDay : null}
+        motdId={motd ? motd.motdId : 0}
       />
     </>
   );

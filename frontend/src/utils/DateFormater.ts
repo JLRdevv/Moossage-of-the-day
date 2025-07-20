@@ -1,3 +1,4 @@
+// Libs
 import dayjs from "dayjs";
 
 export default function formatDate(date: string): string {

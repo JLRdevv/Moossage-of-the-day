@@ -41,6 +41,18 @@ hr {
 
 .actionsDiv {
   display: flex;
+  justify-content: space-between;
+}
+
+.likeDiv {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.buttonsDiv {
+  display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 20px;
 }

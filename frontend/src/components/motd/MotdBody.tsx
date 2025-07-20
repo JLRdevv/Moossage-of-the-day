@@ -1,9 +1,18 @@
-import formatDate from "../../utils/DateFormater";
-import style from "./MotdBody.module.css";
+// Libs
 import { SyncLoader } from "react-spinners";
+import { useState, useEffect } from "react";
+
+// Utils
+import formatDate from "../../utils/DateFormater";
+import getBrowserId from "../../utils/GetBrowserUUID";
+
+// Components
 import Button from "../motd/Button";
 import FlashMessage from "../layout/FlashMessage";
-import { useState } from "react";
+import Like from "./Like";
+
+// Css
+import style from "./MotdBody.module.css";
 
 interface MotdBodyProps {
   message: string | null;
@@ -11,6 +20,7 @@ interface MotdBodyProps {
   error: string | null;
   date: string | null;
   weekDay: string | null;
+  motdId: number;
 }
 
 export default function MotdBody({
@@ -19,6 +29,7 @@ export default function MotdBody({
   error,
   date,
   weekDay,
+  motdId,
 }: MotdBodyProps) {
   if (!date) {
     date = "No date available";
@@ -28,6 +39,13 @@ export default function MotdBody({
   function handleRetry() {
     window.location.reload();
   }
+
+  const [BrowserUuid, setBrowserUuid] = useState("");
+
+  useEffect(() => {
+    const uuid = getBrowserId();
+    setBrowserUuid(uuid);
+  }, []);
 
   const [flashmessage, setFlashMessage] = useState("");
   const [type, setType] = useState<string>("");
@@ -83,18 +101,23 @@ export default function MotdBody({
           />
         ) : !loading ? (
           <>
-            <Button
-              text="Share"
-              onclick={handleShare}
-              icon={<i className="bi bi-share"></i>}
-              iconOnHover={<i className="bi bi-share-fill"></i>}
-            />
-            <Button
-              text="Copy"
-              onclick={handleCopy}
-              icon={<i className="bi bi-clipboard"></i>}
-              iconOnHover={<i className="bi bi-clipboard-check-fill"></i>}
-            />
+            <div className={style.likeDiv}>
+              <Like motdId={motdId} userUuid={BrowserUuid} />
+            </div>
+            <div className={style.buttonsDiv}>
+              <Button
+                text="Share"
+                onclick={handleShare}
+                icon={<i className="bi bi-share"></i>}
+                iconOnHover={<i className="bi bi-share-fill"></i>}
+              />
+              <Button
+                text="Copy"
+                onclick={handleCopy}
+                icon={<i className="bi bi-clipboard"></i>}
+                iconOnHover={<i className="bi bi-clipboard-check-fill"></i>}
+              />
+            </div>
           </>
         ) : (
           <Button
