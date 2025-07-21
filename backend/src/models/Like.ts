@@ -1,44 +1,18 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
-import db from "../database/database";
-import MOTD from "./MOTD";
+import moongose from "../database/database";
+const { Schema } = moongose
 
-class Like extends Model<InferAttributes<Like>, InferCreationAttributes<Like>> {
-  declare id: CreationOptional<number>;
-  declare user_uuid: string;
-  declare motdId: number;
-}
-
-Like.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+const Like = moongose.model(
+  'Like',
+  new Schema({
     user_uuid: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true
     },
     motdId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: String,
+      required: true
     },
-  },
-  
-  {
-    sequelize: db,
-    modelName: "like",
-    tableName: "likes",
-  }
-);
-
-Like.belongsTo(MOTD, { foreignKey: "motdId" });
-MOTD.hasMany(Like, { foreignKey: "motdId" });
+  })
+)
 
 export default Like;

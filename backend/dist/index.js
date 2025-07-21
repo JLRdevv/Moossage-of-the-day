@@ -18,7 +18,10 @@ const customRouter_1 = __importDefault(require("./routes/customRouter"));
 require("./services/dailyQuoteColector");
 const rateLimiter_1 = __importDefault(require("./config/rateLimiter"));
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ credentials: true, origin: "http://localhost:5173" }));
+app.use((0, cors_1.default)({
+    credentials: true,
+    origin: ["http://192.168.2.117:5173", "http://localhost:5173"]
+}));
 app.use(express_1.default.urlencoded({
     extended: true,
 }));
