@@ -13,7 +13,7 @@ import Like from "./Like";
 import Timer from "../layout/Timer";
 
 // Css
-import style from "./MotdBody.module.css";
+import style from "./motdBody.module.css";
 
 
 interface MotdBodyProps {
