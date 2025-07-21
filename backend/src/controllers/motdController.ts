@@ -1,28 +1,28 @@
 import MOTD from "../models/MOTD";
 import { say } from "cowsay";
-import { response, text, type Request, type Response } from "express";
+import { type Request, type Response } from "express";
 import motdFetcher from "../services/dailyQuoteColector";
 import dayjs from "dayjs";
+
+
+export interface Motd {
+  message: string;
+  author: string;
+  date: string;
+  _id: string
+}
 
 class motdController {
   static async getMotd(req: Request, res: Response): Promise<Response> {
     const today = dayjs().format("YYYY-MM-DD");
     const weekDay = dayjs().format("dddd");
 
-    let getMotd = await MOTD.findOne({
-      where: { date: today },
-      order: [["id", "DESC"]],
-      raw: true,
-    });
+    let getMotd = await MOTD.findOne({ date: today }).sort({ id: -1 }).lean<Motd>()
 
     if (!getMotd) {
       // Fetch new MOTD and retry
       await motdFetcher();
-      getMotd = await MOTD.findOne({
-        where: { date: today },
-        order: [["id", "DESC"]],
-        raw: true,
-      });
+      getMotd = await MOTD.findOne({ date: today }).sort({ id: -1 }).lean<Motd>();
     }
 
     let eyes = "oO";
@@ -38,7 +38,7 @@ class motdController {
 
     if (getMotd) {
       const responseMessage = say({
-        text: `"${getMotd.message}"\n -${getMotd.author}`,
+        text: `"${getMotd.message}"\n- ${getMotd.author}`,
         e: eyes,
         T: tongue,
         W: 45,
@@ -48,7 +48,7 @@ class motdController {
         success: true,
         date: getMotd.date,
         weekDay,
-        motdId: getMotd.id,
+        motdId: getMotd._id
       });
     }
     return res.status(500).json({

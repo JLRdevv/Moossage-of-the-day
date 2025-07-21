@@ -23,7 +23,6 @@ class Custom {
       T: tongue,
       e: eyes,
     });
-    console.log(responseMessage);
     res.status(200).json({
       data: responseMessage,
     });

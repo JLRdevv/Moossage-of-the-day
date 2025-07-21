@@ -1,10 +1,19 @@
-import { Sequelize } from "sequelize";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import path from "path";
 
-const db = new Sequelize("motd", "root", "", {
-    host: "localhost",
-    dialect: "mysql"
-})
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+}
 
-db.authenticate()
+const mongoURI = process.env.DB_URI!;
 
-export default db
+async function main() {
+  await mongoose.connect(mongoURI);
+}
+
+main().catch((err) => {
+  console.log(err);
+});
+
+export default mongoose;

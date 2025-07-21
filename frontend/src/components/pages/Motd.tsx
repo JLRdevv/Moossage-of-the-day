@@ -28,7 +28,7 @@ export default function Motd() {
         const response = await api.get("/get/motd");
         setMotd(response.data);
       } catch (err) {
-        setError("Failed to fetch message of the day.");
+        setError(err as any);
       } finally {
         setLoading(false);
       }

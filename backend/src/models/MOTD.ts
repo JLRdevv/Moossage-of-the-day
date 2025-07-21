@@ -1,45 +1,23 @@
-import {
-  Model,
-  DataTypes,
-  InferAttributes,
-  InferCreationAttributes,
-  CreationOptional,
-} from "sequelize";
-import db from "../database/database";
+import moongose from "../database/database";
+const { Schema } = moongose
 
-class MOTD extends Model<InferAttributes<MOTD>, InferCreationAttributes<MOTD>> {
-  declare id: CreationOptional<number>;
-  declare message: string;
-  declare author: string;
-  declare date: string;
-}
-
-MOTD.init(
-  {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
+const MOTD = moongose.model(
+  'Motd',
+  new Schema({
     message: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true
     },
     author: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: String,
+      required: true
     },
     date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      unique: true,
+      type: String,
+      required: true,
+      unique: true
     },
-  },
-  {
-    sequelize: db,
-    modelName: "motd",
-    tableName: "motds",
-  }
-);
+  })
+)
 
 export default MOTD;

@@ -2,7 +2,7 @@ import cron from "node-cron";
 import MOTD from "../models/MOTD";
 import dayjs = require("dayjs");
 import axios, { AxiosResponse } from "axios";
-
+import { Motd } from "../controllers/motdController";
 type motdObject = {
   message: string;
   author: string;
@@ -29,21 +29,24 @@ async function fetchData(date: string): Promise<motdObject> {
 }
 
 export default async function motdFetcher() {
-  console.log('gathering message...')
+  console.log('fetching message...')
   const today = dayjs().format("YYYY-MM-DD");
+
   try {
-    const response = await MOTD.findOne({ where: { date: today }, raw: true });
-    console.log('found response:', response);
+    const response = await MOTD.findOne({ date: today }).lean<Motd>();
     if (!response) {
       const data = await fetchData(today);
-      await MOTD.create(data);
+      const motd = new MOTD(data)
+      await motd.save();
     }
   } catch (error) {
-    await MOTD.create({
+    const errorObj = {
       message: "there was an error while saving today's moosage",
       author: "sorry",
       date: today,
-    });
+      };
+    const motd = new MOTD(errorObj)
+    motd.save()
   }
 }
 
