@@ -25,11 +25,14 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const IP_ADRESS_CORS = process.env.IP_ADRESS!;
+
+const allowedOrigins = process.env.IP_ADRESS!.split(",");
+
 console.log(IP_ADRESS_CORS)
 app.use(
   cors({
     credentials: true,
-    origin: IP_ADRESS_CORS,
+    origin: allowedOrigins,
   })
 );
 
@@ -49,8 +52,8 @@ app.use("/like", routerlike);
 
 // app.use("/custom", routercustom);
 
-const port = 5000;
+const PORT = parseInt(process.env.PORT!) || 5000;
 
-app.listen(port, "0.0.0.0", () => {
-  console.log(`App running on port ${port}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`App running on port ${PORT}`);
 });
