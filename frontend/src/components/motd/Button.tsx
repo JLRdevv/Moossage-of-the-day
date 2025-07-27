@@ -6,13 +6,14 @@ import { useState } from "react";
 import styleCss from "./button.module.css";
 
 interface ButtonProps {
-  text: string;
-  onclick: () => void;
+  text?: string | React.ReactNode;
+  onclick?: () => void;
   icon?: React.ReactNode;
   iconOnHover?: React.ReactNode;
   styleProp?: string;
   disabled?: boolean;
   toggled?: boolean;
+  isSubmit?: boolean;
 }
 
 export default function Button({
@@ -23,6 +24,7 @@ export default function Button({
   styleProp,
   disabled,
   toggled,
+  isSubmit = false,
 }: ButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -36,6 +38,7 @@ export default function Button({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         disabled={disabled}
+        type={isSubmit ? "submit" : "button"}
       >
         {text}{" "}
         {toggled

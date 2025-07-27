@@ -16,16 +16,25 @@ footer {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  gap: 15px;
 }
 
 .footerDiv p.pFooter {
   font-size: 1rem;
   font-weight: bold;
 }
-
 .heartSpan {
   animation: pulse 1s infinite;
   display: inline-block;
+}
+
+.nameSpan {
+  color: white;
+  text-decoration: none;
+}
+
+.nameSpan:hover {
+  color: #c0c0c0;
 }
 
 @keyframes pulse {

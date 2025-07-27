@@ -1,7 +1,7 @@
-button {
+.buttonStyle {
   width: fit-content;
   height: fit-content;
-  padding: 10px 20px;
+  padding: 8px 20px;
   font-size: 1.1em;
   font-weight: bold;
   border-radius: 10px;
@@ -10,20 +10,24 @@ button {
   color: white;
   cursor: pointer;
   transition: 200ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
 .toggled,
-button:hover {
+.buttonStyle:hover {
   background-color: white;
   color: var(--primary-color);
 }
 
-button:disabled {
+.buttonStyle:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) { 
-  button {
+@media (max-width: 768px) {
+  .buttonStyle {
     font-size: 1.11em;
     padding: 4px 3px;
   }

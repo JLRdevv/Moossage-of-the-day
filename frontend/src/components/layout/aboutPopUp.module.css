@@ -1,0 +1,119 @@
+.outerDiv {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+  background-color: var(--background-color);
+  padding: 30px 20px;
+  border-radius: 20px;
+  animation: fadeIn 0.2s ease-in-out;
+  color: white;
+  box-shadow: 0 6px 20px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hidden {
+  display: none;
+}
+
+.tooltipTrigger {
+  cursor: pointer;
+  color: #a5a5ff;
+  text-decoration: underline;
+}
+
+.title {
+  font-size: 2em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.paragraph {
+  text-align: justify;
+  font-size: 1.5em;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+}
+
+.myLinks {
+  text-align: center;
+  font-size: 1.5em;
+  margin: 1em 0;
+  font-weight: 600;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .outerDiv {
+    width: 90%;
+    padding: 20px;
+  }
+  .title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .paragraph {
+    text-align: justify;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .myLinks {
+    text-align: center;
+    font-size: 1.3em;
+    margin: 0.2em 0;
+  }
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .outerDiv {
+    width: 90%;
+    padding: 20px;
+    position: fixed;
+  }
+  .title {
+    font-size: 2em;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .paragraph {
+    text-align: justify;
+    font-size: 1em;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .myLinks {
+    text-align: center;
+    font-size: 1.3em;
+    margin: 0.2em 0;
+  }
+  .iconContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5em;
+  }
+}

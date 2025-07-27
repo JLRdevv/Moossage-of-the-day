@@ -8,6 +8,9 @@ import {
 
 // Components
 import Motd from "./components/pages/Motd";
+import CustomSay from "./components/pages/customSay";
+
+// Layouts
 import Navbar from "./components/layout/Navbar";
 import Container from "./components/layout/container";
 import Footer from "./components/layout/Footer";
@@ -20,8 +23,8 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<Navigate to={"/motd"} replace />} />
-            <Route path="/about" element={<h1>Wip</h1>} />
             <Route path="/motd" element={<Motd />} />
+            <Route path="/custom" element={<CustomSay />} />
           </Routes>
         </Container>
         <Footer />

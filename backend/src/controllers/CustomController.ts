@@ -7,8 +7,9 @@ class Custom {
     let eyes = "oO";
 
     if (req.body) {
-      if (req.body.text) {
-        text = req.body.text;
+      console.log(req.body);
+      if (req.body.message) {
+        text = req.body.message;
       }
       if (req.body.tongue) {
         tongue = req.body.tongue;
@@ -22,7 +23,8 @@ class Custom {
       text,
       T: tongue,
       e: eyes,
-    });
+      W: 30,
+    } as any);
     res.status(200).json({
       data: responseMessage,
     });

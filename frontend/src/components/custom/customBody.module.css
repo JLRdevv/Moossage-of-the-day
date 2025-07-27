@@ -1,0 +1,33 @@
+.customBody {
+  display: flex;
+  gap: 100px;
+  align-items: center;
+}
+.inputContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.preResult {
+  font-family: "monospace", monospace;
+  font-size: 1.5em;
+  font-weight: 100;
+  height: fit-content;
+  margin-bottom: 1em;
+}
+
+@media (max-width: 768px) {
+  div.customBody {
+    flex-direction: column;
+    gap: 2em;
+  }
+  .preResult {
+    font-size: 1.2em;
+  }
+}

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && node ./dist/index.js",
+    "start": "node ./dist/index.js",
     "dev": "ts-node-dev --respawn src/index.ts",
-    "build": "npm install"
+    "build": "npm install && tsc"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.1",
+    "moment-timezone": "^0.6.0",
     "mongoose": "^8.16.4",
     "mysql2": "^3.14.2",
     "node-cron": "^4.2.1",

@@ -1,9 +1,11 @@
+// Lib
 import { useEffect, useState } from "react";
+
+// Css
 import style from "./timer.module.css";
 
 export default function Timer() {
   const [timeLeft, setTimeLeft] = useState<string>("");
-  const [isMobileLandscape, setIsMobileLandscape] = useState(false);
 
   useEffect(() => {
     const updateTimer = () => {
@@ -31,34 +33,9 @@ export default function Timer() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const checkDeviceOrientation = () => {
-      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      setIsMobileLandscape(isLandscape && isMobile);
-    };
-
-    checkDeviceOrientation();
-
-    window.addEventListener("resize", checkDeviceOrientation);
-    window.addEventListener("orientationchange", checkDeviceOrientation);
-
-    return () => {
-      window.removeEventListener("resize", checkDeviceOrientation);
-      window.removeEventListener("orientationchange", checkDeviceOrientation);
-    };
-  }, []);
-
   return (
     <div className={style.outerDiv}>
-      {!isMobileLandscape ? (
-        <>
-          <h2 className={style.timerTitle}>Next moossage in:</h2>
-          <h1 className={style.timerNumber}>{timeLeft}</h1>
-        </>
-      ) : (
-        <h2 className={style.timerTitle}>Next moossage in: {timeLeft}</h2>
-      )}
+      <h2 className={style.timerTitle}>Next moossage in: {timeLeft}</h2>
     </div>
   );
 }

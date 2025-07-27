@@ -1,7 +1,4 @@
-// Libs
 import { useState, useEffect } from "react";
-
-// Css
 import style from "./flashMessage.module.css";
 
 interface FlashMessageProps {
@@ -9,6 +6,7 @@ interface FlashMessageProps {
   type: string;
   isVisible: boolean;
   icon?: React.ReactNode;
+  onClose?: () => void;
 }
 
 export default function FlashMessage({
@@ -16,28 +14,33 @@ export default function FlashMessage({
   type,
   icon,
   isVisible,
+  onClose,
 }: FlashMessageProps) {
-  const [visible, setVisible] = useState(isVisible);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (isVisible) {
+      setVisible(true);
+      const timeout = setTimeout(() => {
+        setVisible(false);
+        if (onClose) onClose();
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
+  }, [isVisible, onClose]);
+
+  if (!visible) return null;
 
   return (
-    <>
-      <div
-        className={`${style.flashMessage} ${
-          type === "success" ? style.success : style.error
+    <div
+      className={`${style.flashMessage} ${type === "success" ? style.success : style.error
         } ${visible ? style.visible : ""}`}
-      >
-        <p>
-          {message} {icon ? icon : ""}
-        </p>
-        <hr className={style.progressBar} />
-      </div>
-    </>
+    >
+      <p className={style.flashMessageP}>
+        {icon} {message}
+      </p>
+      <hr className={style.progressBar} />
+    </div>
   );
 }
+

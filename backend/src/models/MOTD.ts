@@ -1,23 +1,23 @@
 import moongose from "../database/database";
-const { Schema } = moongose
+const { Schema } = moongose;
 
 const MOTD = moongose.model(
-  'Motd',
+  "Motd",
   new Schema({
     message: {
       type: String,
-      required: true
+      required: true,
     },
     author: {
       type: String,
-      required: true
+      required: true,
     },
     date: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
     },
   })
-)
+);
 
 export default MOTD;

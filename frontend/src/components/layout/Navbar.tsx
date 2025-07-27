@@ -1,28 +1,38 @@
 // Lib
-import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
+// Components
+import About from "./aboutPopUp";
 
 // CSS
-import "./navbar.module.css";
+import style from "./navbar.module.css";
 
 export default function Navbar() {
-  const [location, setLocation] = useState("/");
-  const locationObj = useLocation();
+  const [isHidden, setIsHidden] = useState(true)
 
-  useEffect(() => {
-    setLocation(locationObj.pathname);
-  }, [locationObj.pathname]);
+
+
+  function handleAbout() {
+    setIsHidden(false);
+  }
+
+  function handleCloseAbout() {
+    setIsHidden(true);
+  }
 
   return (
     <>
       <nav>
         <p>Moossage of the day!</p>
-        {location === "/motd" ? (
-          <Link to="/about">About</Link>
-        ) : (
-          <Link to="/motd">Moossage</Link>
-        )}
+        <div className={style.navLinks}>
+          <span className={style.navLink} onClick={handleAbout}>About</span>
+          <div className={style.navDivider} />
+          <span className={style.navLink}><Link to={"custom"}>Custom</Link></span>
+          <span className={style.navLink}><Link to={"motd"}>Motd</Link></span>
+        </div>
       </nav>
+      <About hidden={isHidden} onClose={handleCloseAbout} />
     </>
   );
 }

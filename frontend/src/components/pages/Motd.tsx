@@ -6,6 +6,7 @@ import api from "../../utils/Api";
 
 // Components
 import MotdBody from "../motd/MotdBody";
+import Timer from "../layout/Timer";
 
 interface MotdData {
   data: string;
@@ -38,6 +39,7 @@ export default function Motd() {
 
   return (
     <>
+      <Timer />
       <MotdBody
         message={motd ? motd.data : null}
         loading={loading}
