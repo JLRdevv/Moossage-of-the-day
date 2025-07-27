@@ -2,7 +2,7 @@
 import { type ReactNode } from "react";
 
 // Css
-import styles from "./Tooltip.module.css";
+import styles from "./tooltip.module.css";
 
 type TooltipProps = {
   text: string;
