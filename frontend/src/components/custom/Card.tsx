@@ -1,5 +1,5 @@
 // Css
-import style from './Card.module.css';
+import style from './card.module.css';
 
 interface CardProps {
   children: React.ReactNode;

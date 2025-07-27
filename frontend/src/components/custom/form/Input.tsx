@@ -1,5 +1,5 @@
 // Css
-import style from './Input.module.css';
+import style from './input.module.css';
 
 interface InputProps {
     type: string;

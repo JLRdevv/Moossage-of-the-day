@@ -13,7 +13,7 @@ import FlashMessage from '../layout/FlashMessage';
 import Api from '../../utils/Api';
 
 // Css
-import style from './CustomBody.module.css';
+import style from './customBody.module.css';
 
 export default function CustomBody() {
     const [customMessage, setCustomMessage] = useState('');
