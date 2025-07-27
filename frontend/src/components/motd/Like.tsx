@@ -64,7 +64,7 @@ export default function Like({ motdId, userUuid }: LikeProps) {
         motdId,
         user_uuid: userUuid,
       });
-      if(fetch && fetch.data.liked === true) {
+      if (fetch && fetch.data.liked === true) {
         setIsLiked(true)
         return
       }
@@ -79,13 +79,11 @@ export default function Like({ motdId, userUuid }: LikeProps) {
         <Button
           text={isLiked ? 'Dislike' : 'Like'}
           onclick={handleLike}
-          icon={<i className="bi bi-hand-thumbs-up"></i>}
+          icon={loading ? (<MoonLoader color="white" size={20} />) : <i className="bi bi-hand-thumbs-up"></i>}
           iconOnHover={<i className="bi bi-hand-thumbs-up-fill"></i>}
           toggled={isLiked}
         />
-        {loading ? (
-          <MoonLoader color="white" size={20} />
-        ) : error ? (
+        {error ? (
           <p className={style.likesCount}>{error}</p>
         ) : (
           <p className={style.likesCount}>{likes}</p>

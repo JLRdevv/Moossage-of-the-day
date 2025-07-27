@@ -2,7 +2,7 @@ import MOTD from "../models/MOTD";
 import Like from "../models/Like";
 import { type Request, type Response } from "express";
 import { ObjectId } from "mongoose";
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 interface expectedRequestBody {
   user_uuid: string;

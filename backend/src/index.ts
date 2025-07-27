@@ -12,7 +12,7 @@ import "./models/Like";
 // Routers
 import routermotd from "./routes/motdRouter";
 import routerlike from "./routes/likeRouter";
-// import routercustom from "./routes/customRouter";
+import routercustom from "./routes/customRouter";
 
 // Services
 import "./services/dailyQuoteColector";
@@ -50,7 +50,7 @@ app.use("/get", routermotd);
 
 app.use("/like", routerlike);
 
-// app.use("/custom", routercustom);
+app.use("/custom", routercustom);
 
 const PORT = parseInt(process.env.PORT!) || 5000;
 

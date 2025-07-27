@@ -1,12 +1,17 @@
 .timerNumber {
-    text-align: center;
+  text-align: center;
 }
 
 .timerTitle {
-    font-size: 2em;
+  font-size: 2em;
 }
 
 .outerDiv {
-    color: white;
+  color: white;
 }
 
+@media (max-width: 768px) {
+  .timerTitle {
+    font-size: 1.5em;
+  }
+}
