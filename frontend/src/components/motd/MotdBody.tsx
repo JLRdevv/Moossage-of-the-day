@@ -77,7 +77,7 @@ export default function MotdBody({
       ) : (
         <>
           <h1 className={style.dateTitle}>{date}</h1>
-          <h2 className={style.weekDayTitle}>{weekDay}</h2>
+          <h2 className={style.weekDayTitle}>{weekDay} - UTC</h2>
         </>
       )}
 

@@ -1,5 +1,4 @@
 import cron from "node-cron";
-import moment from 'moment-timezone'
 import MOTD from "../models/MOTD";
 import dayjs = require("dayjs");
 import axios, { AxiosResponse } from "axios";
@@ -52,8 +51,6 @@ export default async function motdFetcher() {
 }
 
 // get new Quote every day at midnight GMT-3
-cron.schedule("0 3 * * *", motdFetcher, {
-  timezone: 'America/Sao_Paulo'
-});
+cron.schedule("0 0 * * *", motdFetcher)
 
 
