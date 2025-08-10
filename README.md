@@ -29,18 +29,12 @@ To run the project locally:
 2. Install dependencies:
 
    ```bash
-   npm install
-   ```
-
-3. Build the project:
-
-   ```bash
    npm run build
    ```
+   
+> This custom script will install both backend and frontend dependecies
 
-> This will build both backend and frontend
-
-4. Start the server:
+3. Start the server:
 
    ```bash
    npm start
@@ -48,9 +42,9 @@ To run the project locally:
 
 > This will start both backend and frontend.
 
-5. Open your browser and navigate to `http://localhost:5173` to access the frontend.
+4. Open your browser and navigate to `http://localhost:5173` to access the frontend.
 
-6. To access your backend, configure the port in your `.env` file, for example:
+5. To access your backend, configure the port in your `.env` file, for example:
 
    ```
    PORT=5000
@@ -58,7 +52,7 @@ To run the project locally:
 
 ## ⚙️ Usage
 
-Once running locally, simply open the URL and enjoy the daily moossage, like it, or make your own moossage.
+Once running locally, simply open the URL and enjoy the daily moossage, then like it, or make your very own custom moossage.
 
 ## 📡 API Documentation
 
