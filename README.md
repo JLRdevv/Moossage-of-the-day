@@ -2,7 +2,7 @@
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Render](https://img.shields.io/badge/Render-000000?style=for-the-badge&logo=render&logoColor=white)
 
 ## 📝 About
 
@@ -13,7 +13,7 @@ Moossage of the Day is a web application that delivers a daily message to the us
 - **Daily Messages**: Receive a new moossage from your kind friend Ms. cow.
 - **Custom messages**: Create a custom moossage and customize your cow.
 - **Likes system**: Like a moossage (uses uuid, you don't need to login).
-- **Easy Deployment**: Hosted on Vercel for quick and reliable access.
+- **Easy Deployment**: Hosted on Render for quick and reliable access.
 
 ## 📦 Installation
 
@@ -66,12 +66,9 @@ Once running locally, simply open the URL and enjoy the daily moossage, then lik
 
 ## 🌐 Live Demo
 
-Experience the live version at [moossage-of-the-day.vercel.app](https://moossage-of-the-day.vercel.app).
+Experience the live version at [https://moossage-of-the-day.onrender.com/motd](https://moossage-of-the-day.onrender.com/motd).<br/>
+[![Render Status](https://img.shields.io/website-up-down-green-red/http/moossage-of-the-day.onrender.com.svg?style=for-the-badge&label=Render)](https://moossage-of-the-day.onrender.com)
 
 ## 🤝 Contributing
 
 Contributions are welcome! Please fork the repository, create a new branch, and submit a pull request with your proposed changes.
-
-## 🙌 Shout-out
-
-A big thanks to the [cowsay repository](https://github.com/piuccio/cowsay) for the inspiration and fun messages! 🐮💬
